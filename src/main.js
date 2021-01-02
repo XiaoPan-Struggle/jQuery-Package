@@ -15,3 +15,4 @@ arr.each((element, index) => {
 
 
 jQuery('.test').parent().print()
+jQuery('.test').children().print()
