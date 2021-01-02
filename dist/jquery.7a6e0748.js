@@ -157,6 +157,15 @@ window.jQuery = function (selectorOrArray) {
       }
 
       return this; // this 就是 window.jQuery里返回的那个对象
+    },
+    parent: function parent() {
+      var array = [];
+      this.each(function (node) {
+        if (array.indexOf(node.parentNode) === -1) {
+          array.push(node.parentNode);
+        }
+      });
+      return jQuery(array);
     }
   };
 };

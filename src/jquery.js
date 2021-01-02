@@ -31,6 +31,15 @@ window.jQuery = function(selectorOrArray) {
         fn.call(null, elements[i], i)
       }
       return this // this 就是 window.jQuery里返回的那个对象
+    },
+    parent() {
+      const array = []
+      this.each((node) => {
+        if (array.indexOf(node.parentNode) === -1) {
+          array.push(node.parentNode)
+        }
+      })
+      return jQuery(array)
     }
   }
 }
