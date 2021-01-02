@@ -12,3 +12,6 @@ arr.each((element, index) => {
   console.log(index)
   console.log(element)
 })
+
+
+jQuery('.test').parent().print()
