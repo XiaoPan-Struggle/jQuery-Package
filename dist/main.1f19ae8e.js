@@ -130,6 +130,7 @@ arr.each(function (element, index) {
 });
 jQuery('.test').parent().print();
 jQuery('.test').children().print();
+jQuery('.test').find('.child1').siblings().print();
 },{}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
