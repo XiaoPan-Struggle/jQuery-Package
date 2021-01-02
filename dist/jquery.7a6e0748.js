@@ -166,6 +166,9 @@ window.jQuery = function (selectorOrArray) {
         }
       });
       return jQuery(array);
+    },
+    print: function print() {
+      console.log(elements);
     }
   };
 };

@@ -40,6 +40,9 @@ window.jQuery = function(selectorOrArray) {
         }
       })
       return jQuery(array)
+    },
+    print() {
+      console.log(elements)
     }
   }
 }
