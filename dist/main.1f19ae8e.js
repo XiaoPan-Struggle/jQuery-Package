@@ -121,7 +121,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 // const api = jQuery('.test')
 // api.addClass('.red').addClass('.blue')
 jQuery('.test').addClass('.red').addClass('.blue');
-var child = jQuery('.test').find('.child');
+var child = jQuery('.test').find('.child').addClass('.tex').end().addClass('.xxx');
 console.log(child);
 },{}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

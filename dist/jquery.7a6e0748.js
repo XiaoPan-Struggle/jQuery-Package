@@ -128,6 +128,7 @@ window.jQuery = function (selectorOrArray) {
   }
 
   return {
+    oldApi: selectorOrArray.oldApi,
     addClass: function addClass(className) {
       // 闭包： 函数访问外部的变量
       for (var i = 0; i < elements.length; i++) {
@@ -144,7 +145,18 @@ window.jQuery = function (selectorOrArray) {
         array = array.concat(ele);
       }
 
+      array.oldApi = this;
       return jQuery(array);
+    },
+    end: function end() {
+      return this.oldApi;
+    },
+    each: function each(fn) {
+      for (var i = 0; i < elements.length; i++) {
+        fn.call(null, elements[i], i);
+      }
+
+      return this; // this 就是 window.jQuery里返回的那个对象
     }
   };
 };

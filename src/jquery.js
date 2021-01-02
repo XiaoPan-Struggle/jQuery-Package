@@ -25,6 +25,12 @@ window.jQuery = function(selectorOrArray) {
     },
     end() {
       return this.oldApi
+    },
+    each(fn) {
+      for(let i = 0; i < elements.length; i++) {
+        fn.call(null, elements[i], i)
+      }
+      return this // this 就是 window.jQuery里返回的那个对象
     }
   }
 }
