@@ -18,3 +18,5 @@ jQuery('.test').parent().print()
 jQuery('.test').children().print()
 
 jQuery('.test').find('.child1').siblings().print()
+
+$('.test').find('.child').addClass('.yyy')

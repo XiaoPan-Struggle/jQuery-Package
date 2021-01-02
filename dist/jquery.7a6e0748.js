@@ -201,6 +201,8 @@ window.jQuery = function (selectorOrArray) {
     }
   };
 };
+
+window.$ = window.jQuery;
 },{}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
