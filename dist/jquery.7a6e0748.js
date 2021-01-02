@@ -118,7 +118,20 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"jquery.js":[function(require,module,exports) {
+window.jQuery = function (selector) {
+  var elements = document.querySelectorAll(selector);
+  var api = {
+    addClass: function addClass(className) {
+      // 闭包： 函数访问外部的变量
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.add(className);
+      }
 
+      return api;
+    }
+  };
+  return api;
+};
 },{}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
