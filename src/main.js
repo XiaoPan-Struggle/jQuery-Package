@@ -6,3 +6,9 @@ jQuery('.test')
 
 const child = jQuery('.test').find('.child').addClass('.tex').end().addClass('.xxx')
 console.log(child)
+
+const arr = jQuery('.test').find('.child')
+arr.each((element, index) => {
+  console.log(index)
+  console.log(element)
+})
