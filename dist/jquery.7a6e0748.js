@@ -120,17 +120,16 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"jquery.js":[function(require,module,exports) {
 window.jQuery = function (selector) {
   var elements = document.querySelectorAll(selector);
-  var api = {
+  return {
     addClass: function addClass(className) {
       // 闭包： 函数访问外部的变量
       for (var i = 0; i < elements.length; i++) {
         elements[i].classList.add(className);
       }
 
-      return api;
+      return this; // 链式编程,这里this就是这个对象
     }
   };
-  return api;
 };
 },{}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
