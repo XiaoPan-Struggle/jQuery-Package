@@ -6,6 +6,7 @@ window.jQuery = function(selectorOrArray) {
     elements = selectorOrArray
   }
   return {
+    oldApi:selectorOrArray.oldApi,
     addClass(className) {
       // 闭包： 函数访问外部的变量
       for(let i = 0; i < elements.length; i++) {
@@ -19,7 +20,11 @@ window.jQuery = function(selectorOrArray) {
         const ele = Array.from(elements[i].querySelectorAll(selector))
         array = array.concat(ele)
       }
+      array.oldApi = this
       return jQuery(array)
+    },
+    end() {
+      return this.oldApi
     }
   }
 }
