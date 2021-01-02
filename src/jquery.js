@@ -48,6 +48,14 @@ window.jQuery = function(selectorOrArray) {
       })
       return jQuery(array)
     },
+    siblings() {
+      const array = []
+      this.each((node) => {
+        let siblingsArr = Array.from(node.parentNode.children).filter(n => n !== node)
+        array.push(...siblingsArr)
+      })
+      return jQuery(array)
+    },
     print() {
       console.log(elements)
     }

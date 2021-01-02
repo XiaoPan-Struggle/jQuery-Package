@@ -186,6 +186,16 @@ window.jQuery = function (selectorOrArray) {
       });
       return jQuery(array);
     },
+    siblings: function siblings() {
+      var array = [];
+      this.each(function (node) {
+        var siblingsArr = Array.from(node.parentNode.children).filter(function (n) {
+          return n !== node;
+        });
+        array.push.apply(array, _toConsumableArray(siblingsArr));
+      });
+      return jQuery(array);
+    },
     print: function print() {
       console.log(elements);
     }
