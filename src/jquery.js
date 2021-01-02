@@ -1,5 +1,10 @@
-window.jQuery = function(selector) {
-  const elements = document.querySelectorAll(selector)
+window.jQuery = function(selectorOrArray) {
+  let elements
+  if (typeof selectorOrArray === 'string') {
+    elements = document.querySelectorAll(selectorOrArray)
+  }else if (selectorOrArray instanceof Array) {
+    elements = selectorOrArray
+  }
   return {
     addClass(className) {
       // 闭包： 函数访问外部的变量
@@ -14,7 +19,7 @@ window.jQuery = function(selector) {
         const ele = Array.from(elements[i].querySelectorAll(selector))
         array = array.concat(ele)
       }
-      return array
+      return jQuery(array)
     }
   }
 }

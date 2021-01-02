@@ -118,8 +118,15 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"jquery.js":[function(require,module,exports) {
-window.jQuery = function (selector) {
-  var elements = document.querySelectorAll(selector);
+window.jQuery = function (selectorOrArray) {
+  var elements;
+
+  if (typeof selectorOrArray === 'string') {
+    elements = document.querySelectorAll(selectorOrArray);
+  } else if (selectorOrArray instanceof Array) {
+    elements = selectorOrArray;
+  }
+
   return {
     addClass: function addClass(className) {
       // 闭包： 函数访问外部的变量
@@ -137,7 +144,7 @@ window.jQuery = function (selector) {
         array = array.concat(ele);
       }
 
-      return array;
+      return jQuery(array);
     }
   };
 };
