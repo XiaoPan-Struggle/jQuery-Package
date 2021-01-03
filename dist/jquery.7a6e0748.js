@@ -130,7 +130,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-window.jQuery = function (selectorOrArray) {
+window.$ = window.jQuery = function (selectorOrArray) {
   var elements;
 
   if (typeof selectorOrArray === 'string') {
@@ -139,70 +139,75 @@ window.jQuery = function (selectorOrArray) {
     elements = selectorOrArray;
   }
 
-  return {
-    oldApi: selectorOrArray.oldApi,
-    addClass: function addClass(className) {
-      // 闭包： 函数访问外部的变量
-      for (var i = 0; i < elements.length; i++) {
-        elements[i].classList.add(className);
-      }
+  var api = Object.create(jQuery.prototype); // 创建一个对象这个对象的 __proto__ 是jQuery.prototype
 
-      return this; // 链式编程,这里this就是这个对象
-    },
-    find: function find(selector) {
-      var array = [];
-
-      for (var i = 0; i < elements.length; i++) {
-        var ele = Array.from(elements[i].querySelectorAll(selector));
-        array = array.concat(ele);
-      }
-
-      array.oldApi = this;
-      return jQuery(array);
-    },
-    end: function end() {
-      return this.oldApi;
-    },
-    each: function each(fn) {
-      for (var i = 0; i < elements.length; i++) {
-        fn.call(null, elements[i], i);
-      }
-
-      return this; // this 就是 window.jQuery里返回的那个对象
-    },
-    parent: function parent() {
-      var array = [];
-      this.each(function (node) {
-        if (array.indexOf(node.parentNode) === -1) {
-          array.push(node.parentNode);
-        }
-      });
-      return jQuery(array);
-    },
-    children: function children() {
-      var array = [];
-      this.each(function (node) {
-        array.push.apply(array, _toConsumableArray(node.children));
-      });
-      return jQuery(array);
-    },
-    siblings: function siblings() {
-      var array = [];
-      this.each(function (node) {
-        var siblingsArr = Array.from(node.parentNode.children).filter(function (n) {
-          return n !== node;
-        });
-        array.push.apply(array, _toConsumableArray(siblingsArr));
-      });
-      return jQuery(array);
-    },
-    print: function print() {
-      console.log(elements);
-    }
-  };
+  Object.assign(api, {
+    elements: elements,
+    oldApi: selectorOrArray.oldApi
+  });
+  return api;
 };
 
-window.$ = window.jQuery;
+jQuery.fn = jQuery.prototype = {
+  addClass: function addClass(className) {
+    // 闭包： 函数访问外部的变量
+    for (var i = 0; i < this.elements.length; i++) {
+      this.elements[i].classList.add(className);
+    }
+
+    return this; // 链式编程,这里this就是这个对象
+  },
+  find: function find(selector) {
+    var array = [];
+
+    for (var i = 0; i < this.elements.length; i++) {
+      var ele = Array.from(this.elements[i].querySelectorAll(selector));
+      array = array.concat(ele);
+    }
+
+    array.oldApi = this;
+    return jQuery(array);
+  },
+  end: function end() {
+    return this.oldApi;
+  },
+  each: function each(fn) {
+    for (var i = 0; i < this.elements.length; i++) {
+      fn.call(null, this.elements[i], i);
+    }
+
+    return this; // this 就是 window.jQuery里返回的那个对象
+  },
+  parent: function parent() {
+    var array = [];
+    this.each(function (node) {
+      if (array.indexOf(node.parentNode) === -1) {
+        array.push(node.parentNode);
+      }
+    });
+    return jQuery(array);
+  },
+  children: function children() {
+    var array = [];
+    this.each(function (node) {
+      array.push.apply(array, _toConsumableArray(node.children));
+    });
+    return jQuery(array);
+  },
+  siblings: function siblings() {
+    var array = [];
+    this.each(function (node) {
+      var siblingsArr = Array.from(node.parentNode.children).filter(function (n) {
+        return n !== node;
+      });
+      array.push.apply(array, _toConsumableArray(siblingsArr));
+    });
+    return jQuery(array);
+  },
+  print: function print() {
+    console.log(this.elements);
+  }
+};
 },{}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
